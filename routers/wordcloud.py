@@ -9,7 +9,7 @@ default_wordcloud=[
     "word_text":"hola"
     },
     {
-    "word_text":"perro"
+    "word_text":"perros"
     }]
 def create_wordcloud():
     pass
