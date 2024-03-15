@@ -10,6 +10,9 @@ default_wordcloud=[
     },
     {
     "word_text":"perros"
+    },
+    {
+    "word_text":"hola que tal me agrada mucho estar aqui"
     }]
 def create_wordcloud():
     pass
