@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
-df_train=pd.read_csv('C:/Users/56975/Desktop/chat-inspector/proces/testing_data/data_sklearn/train_dataset_preproces.csv')
+df_train=pd.read_csv("methods/train_dataset_preproces.csv")
 def create_data_train(dataframe,columna_mensaje,columna_label):
     df = pd.DataFrame({
     'Sentiment': dataframe[columna_label],
