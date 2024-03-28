@@ -1,22 +1,20 @@
-from fastapi import FastAPI,Query,Path,Response,BackgroundTasks
+from fastapi import FastAPI,Query,Path,Response
 import uvicorn
 from info.word_input import input
 from routers.wordcloud import router as wordcloud_router
 from routers.wordcloud import wordcloud
-from methods.plot import db_to_db_words,db_count,create_wordcloud_plot
+from routers.sentiment_polarity import router as sent_router
+from methods.plot import db_to_db_words,db_count
 app=FastAPI()
 db=db_to_db_words(wordcloud)
 db_cloud=db_count(db)
 @app.get('/')
-async def wordcloud_img(background_tasks: BackgroundTasks):
-    img_buf = create_wordcloud_plot(db_cloud)
-    bufContents: bytes = img_buf.getvalue()
-    background_tasks.add_task(img_buf.close)
-    headers = {'Content-Disposition': 'inline; filename="out.png"'}
-    return Response(bufContents, headers=headers, media_type='image/png')
+def wordcloud_db():
+    return db_cloud
 app.include_router(wordcloud_router)
+app.include_router(sent_router)
 @app.post('/search')
-def count(query:input):
+def search_word_frecuency(query:input):
     count=0
     for file in db:
         if file['word_text']==query.word_text:
@@ -29,4 +27,4 @@ def count(query:input):
     ]
     return output
 if __name__ == "__main__":
-    uvicorn.run(app)
+    uvicorn.run("main:app", port=5000, reload=True)

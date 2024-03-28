@@ -22,5 +22,5 @@ if create==True:
 else:
     wordcloud=default_wordcloud
 @router.get('/wordcloud')
-def read_db():
+def read_db():    
     return wordcloud
